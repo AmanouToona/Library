@@ -16,13 +16,13 @@ struct LazySegmentTree {
             x *= 2;
         }
         n = x;
-        data.resize(2 * n - 1);
-        lazy.resize(2 * n - 1, 0);  // lazy 0 が空の状態と定義する
+        data.resize(2 * n - 1, MINF);
+        lazy.resize(2 * n - 1, MINF);  // lazy 0 が空の状態と定義する
     }
 
     // node k の遅延評価
     void eval(int k, int l, int r) {
-        if (lazy[k] != 0) {
+        if (lazy[k] != MINF) {
             data[k] = lazy[k];
 
             if (r - l > 1) {  // 葉ノードでないならば
@@ -30,7 +30,7 @@ struct LazySegmentTree {
                 lazy[2 * k + 2] = lazy[k];
             }
         }
-        lazy[k] = 0;
+        lazy[k] = MINF;
     }
 
     void update(int a, int b, T x, int k = 0, int l = 0, int r = -1) {
