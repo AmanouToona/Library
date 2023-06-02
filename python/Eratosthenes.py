@@ -10,7 +10,7 @@ def eratosthenes(n):
         primes.append(i)
 
         j = i * i
-        while j + i <= n:
-            j += i
+        while j <= n:
             is_prime[j] = False
+            j += i
     return primes
